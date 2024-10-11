@@ -6,7 +6,7 @@ def fibonacci(n):
         return n
     else:
         prev, curr = 0, 1
-        for _ in range(1, n + 1):
+        for _ in range(2, n):
             next = prev + curr
             prev = curr
             curr = next
@@ -31,5 +31,6 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("format: py week2_submission.py [number]")
     input = int(sys.argv[1])
+    print(fibonacci(input))
     print(linear_fibonacci(input))
 
