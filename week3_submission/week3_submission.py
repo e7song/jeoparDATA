@@ -59,6 +59,8 @@ def run_game():
 	move_count = 0
 	game_end = False
 
+	x_win = False
+
 	while move_count < 9:
 		display_grid(grid)
 		if move_count % 2 == 0: # player x to move
@@ -70,6 +72,7 @@ def run_game():
 				display_grid(grid)
 				print(status)
 				game_end = True
+				x_win = True
 				break
 		else: # player y to move
 			make_move(grid, 'y')
@@ -83,11 +86,24 @@ def run_game():
 				break
 	if game_end == False:
 		display_grid(grid)
-		"It's a tie. Try again? [y/n]"
 		if input("It's a tie. Try again? [y/n] ") == 'y':
 			run_game()
-	
 
+	if game_end and x_win:
+		f = open('scoreboard.csv', 'r+')
+		curr = f.read()
+		if curr == '': # empty, no header
+			f.write('player_win\n')
+		f.write('x\n')
+		f.close()
+
+	else:
+		f = open('scoreboard.csv', 'r+')
+		curr = f.read()
+		if curr == '': # empty, no header
+			f.write('player_win\n')
+		f.write('y\n')
+		f.close()
 
 if __name__ == "__main__":
 	run_game()
